@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  web:
+    build:
+     context: .
+     dockerfile: ./Dockerfile
+    hostname: django
+    volumes:
+      - ./:/code
+  nginx:
+    build:
+     context: ./nginx
+     dockerfile: ./Dockerfile.dev
+    restart: always
+    depends_on:
+      - web
+    expose:
+      - 80
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/code
+
+networks:
+  default:
+   driver: bridge
+
+volumes:
+  .:
