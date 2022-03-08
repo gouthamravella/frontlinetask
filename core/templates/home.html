@@ -1,0 +1,30 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h1>Welcome, {{username}}</h1>
+<p><a href="{% url 'logout' %}">Log Out</a></p>
+
+<table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th>Organisation</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+    <!-- jinja2 Technique -->
+    {% if data %}  
+    {% for i in data %}
+      <tr>
+        <td>{{i.organisation}}</td>
+        <td>{{i.role}}</td>
+      </tr>
+    {% endfor %}
+    {% endif %}
+    </tbody>
+  </table>
+
+{% endblock %}
